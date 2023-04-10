@@ -12,10 +12,21 @@ Add-Type @"
     }
 "@
 
+# Open the Start menu
+[void] [System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic')
+[Microsoft.VisualBasic.Interaction]::AppActivate("Start")
+
+# Wait for the Start menu to open
+Start-Sleep -Seconds 2
+
+# Close the Start menu
+[void] [System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms')
+[System.Windows.Forms.SendKeys]::SendWait("{ESC}")
+
 
 $windowName = "Assetto Corsa"  # Replace with the actual window title
 
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 2
 
 $process = Get-Process | Where-Object {$_.MainWindowTitle -eq $windowName}
 
